@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    <div class="container">
+    <div class="container mt-5">
         @yield('content')
     </div>
 </div>

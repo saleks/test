@@ -14,7 +14,7 @@ class AttributesTableSeeder extends Seeder
     {
         $data = [
             ['name' => 'price', 'type' => 'float', 'symbol' => '$'],
-            ['name' => 'with', 'type' => 'integer', 'symbol' => 'mm.'],
+            ['name' => 'width', 'type' => 'integer', 'symbol' => 'mm.'],
             ['name' => 'height', 'type' => 'integer', 'symbol' => 'mm.']
         ];
 
