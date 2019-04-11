@@ -13,3 +13,4 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('/attribute', 'AttributeController');
+Route::resource('/product-type', 'ProductTypeController');

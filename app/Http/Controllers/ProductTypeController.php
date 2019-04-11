@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attribute;
-use App\Services\AttributeService;
+use App\Models\ProductType;
+use App\Services\ProductTypeService;
 use Illuminate\Http\Request;
 
-class AttributeController extends Controller
+class ProductTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,10 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        $attributes = Attribute::all();
+        $productTypeList = ProductType::with('attributes')->get();
+        $attributeList = Attribute::all();
 
-        return view('attribute', compact('attributes'));
+        return view('productType', compact('productTypeList', 'attributeList'));
     }
 
     /**
@@ -34,10 +36,10 @@ class AttributeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param AttributeService $service
+     * @param ProductTypeService $service
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, AttributeService $service)
+    public function store(Request $request, ProductTypeService $service)
     {
         $service->store($request);
         return back();
@@ -62,19 +64,26 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $productType = ProductType::with('attributes')->find($id);
+        $attributeList = Attribute::all();
+
+//        dd($productType);
+
+        return view('productTypeEdit', compact('productType', 'attributeList'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @param ProductTypeService $service
+     * @return void
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, ProductTypeService $service)
     {
-        //
+        $service->update($request, $id);
+        return redirect()->route('product-type.index');
     }
 
     /**
@@ -83,8 +92,9 @@ class AttributeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, ProductTypeService $service)
     {
-        //
+        $service->delete($id);
+        return redirect()->route('product-type.index');
     }
 }
