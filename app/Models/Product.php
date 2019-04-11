@@ -9,4 +9,20 @@ class Product extends Model
     protected $fillable = [
         'sku', 'name'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attributeValues()
+    {
+        return $this->hasMany(AttributeValue::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function productType()
+    {
+        return $this->belongsTo(ProductType::class);
+    }
 }
