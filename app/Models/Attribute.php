@@ -15,6 +15,6 @@ class Attribute extends Model
      */
     public function productTypes()
     {
-        return $this->belongsToMany(ProductType::class);
+        return $this->belongsToMany(ProductType::class, 'product_type_attribute');
     }
 }

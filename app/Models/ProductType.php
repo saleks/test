@@ -11,11 +11,11 @@ class ProductType extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function attributes()
     {
-        return $this->hasMany(Attribute::class);
+        return $this->belongsToMany(Attribute::class, 'product_type_attribute');
     }
 
     /**
