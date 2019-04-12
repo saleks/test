@@ -17,7 +17,7 @@ class CreateAttributeValuesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('attribute_id');
-            $table->string('value');
+            $table->string('value')->nullable()->default(NULL);
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
